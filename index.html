@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Application - 5Nine Creative</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="%23ddd" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="%23f0f0f0"/><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: -50px auto 50px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .form-header h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="url"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="url"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 12px 16px;
+            border: 2px dashed #bdc3c7;
+            border-radius: 8px;
+            text-align: center;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload:hover .file-upload-label {
+            border-color: #3498db;
+            background: #ebf3fd;
+        }
+
+        .submit-section {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e1e8ed;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .help-text {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .form-card {
+                padding: 20px;
+            }
+            
+            .container {
+                margin: -30px auto 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>Let's work together</h1>
+            <p>Interested in working together? Fill out some info and we will be in touch shortly! We can't wait to hear from you!</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>Partner Application</h2>
+                <p>Tell us about your organization and how we can collaborate</p>
+            </div>
+
+            <form id="partnerForm" action="#" method="POST">
+                <div class="form-section">
+                    <h3 class="section-title">Contact Information</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name <span class="required">*</span></label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name <span class="required">*</span></label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number<span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="section-title">Organization Details</h3>
+                    
+                    <div class="form-group">
+                        <label for="orgName">Organization Name <span class="required">*</span></label>
+                        <input type="text" id="orgName" name="orgName" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="orgType">Organization Type <span class="required">*</span></label>
+                            <select id="orgType" name="orgType" required>
+                                <option value="">Select Organization Type</option>
+                                <option value="church">Church</option>
+                                <option value="nonprofit">Non-Profit</option>
+                                <option value="ministry">Ministry</option>
+                                <option value="missions">Missions Organization</option>
+                                <option value="business">Business</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="orgSize">Organization Size</label>
+                            <select id="orgSize" name="orgSize">
+                                <option value="">Select Size</option>
+                                <option value="small">Small (1-50 people)</option>
+                                <option value="medium">Medium (51-200 people)</option>
+                                <option value="large">Large (201-1000 people)</option>
+                                <option value="enterprise">Enterprise (1000+ people)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="website">Website URL</label>
+                        <input type="url" id="website" name="website" placeholder="https://example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="orgDescription">Organization Description <span class="required">*</span></label>
+                        <textarea id="orgDescription" name="orgDescription" placeholder="Tell us about your organization, mission, and what you do..." required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="section-title">Partnership Details</h3>
+                    
+                    <div class="form-group">
+                        <label>Services Interested In <span class="required">*</span></label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="Media & Branding" name="services[]" value="video">
+                                <label for="Media & Branding">Media & Branding</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="Business Setup Services" name="services[]" value="Business Setup Services">
+                                <label for="Business Setup Services">Business Setup Services</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="Consultation" name="services[]" value="Consultation">
+                                <label for="Consultation">Consultation</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="Marketing" name="services[]" value="Marketing">
+                                <label for="Marketing">Marketing</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="Social Media Management" name="services[]" value="Social Media Management">
+                                <label for="Social Media Management">Social Media Management</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="Website/App development" name="services[]" value="Website/App development">
+                                <label for="Website/App development">Website/App development</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="other-service" name="services[]" value="other">
+                                <label for="other-service">Other</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectDetails">Project Details <span class="required">*</span></label>
+                        <textarea id="projectDetails" name="projectDetails" placeholder="Describe your project, goals, timeline, and any specific requirements..." required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="budget">Budget Range</label>
+                            <select id="budget" name="budget">
+                                <option value="">Select Budget Range</option>
+                                <option value="under-5k">Under ₹5,000</option>
+                                <option value="5k-10k">₹5,000 - ₹10,000</option>
+                                <option value="10k-25k">₹10,000 - ₹25,000</option>
+                                <option value="25k-50k">₹25,000 - ₹50,000</option>
+                                <option value="50k-plus">₹50,000+</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="timeline">Project Timeline</label>
+                            <select id="timeline" name="timeline">
+                                <option value="">Select Timeline</option>
+                                <option value="asap">ASAP</option>
+                                <option value="1-month">Within 1 month</option>
+                                <option value="2-3-months">2-3 months</option>
+                                <option value="3-6-months">3-6 months</option>
+                                <option value="6-months-plus">6+ months</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="section-title">Additional Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="referral">How did you hear about us?</label>
+                        <select id="referral" name="referral">
+                            <option value="">Select one</option>
+                            <option value="google">Google Search</option>
+                            <option value="social">Social Media</option>
+                            <option value="referral">Referral</option>
+                            <option value="website">Website</option>
+                            <option value="event">Event/Conference</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="additionalInfo">Additional Comments</label>
+                        <textarea id="additionalInfo" name="additionalInfo" placeholder="Any additional information you'd like to share..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="portfolio">Portfolio/Examples (Optional)</label>
+                        <div class="file-upload">
+                            <input type="file" id="portfolio" name="portfolio" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                            <label for="portfolio" class="file-upload-label">
+                                📁 Click to upload files or drag and drop
+                            </label>
+                        </div>
+                        <div class="help-text">Upload any relevant documents, images, or examples (PDF, DOC, JPG, PNG)</div>
+                    </div>
+                </div>
+
+                <div class="submit-section">
+                    <button type="submit" class="submit-btn">Submit Application</button>
+                    <p class="help-text">We'll review your application and get back to you within 2-3 business days</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('partnerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic form validation
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.style.borderColor = '#e74c3c';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '#e1e8ed';
+                }
+            });
+            
+            // Check if at least one service is selected
+            const services = this.querySelectorAll('input[name="services[]"]:checked');
+            if (services.length === 0) {
+                alert('Please select at least one service you\'re interested in.');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Simulate form submission
+                const submitBtn = this.querySelector('.submit-btn');
+                submitBtn.textContent = 'Submitting...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Thank you for your application! We\'ll be in touch soon.');
+                    submitBtn.textContent = 'Submit Application';
+                    submitBtn.disabled = false;
+                    this.reset();
+                }, 2000);
+            } else {
+                alert('Please fill in all required fields.');
+            }
+        });
+
+        // File upload preview
+        document.getElementById('portfolio').addEventListener('change', function(e) {
+            const label = this.nextElementSibling;
+            const fileCount = this.files.length;
+            if (fileCount > 0) {
+                label.textContent = `📁 ${fileCount} file(s) selected`;
+            } else {
+                label.textContent = '📁 Click to upload files or drag and drop';
+            }
+        });
+    </script>
+</body>
+</html>
